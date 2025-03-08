@@ -36,7 +36,7 @@
 	- [4.1 Reconnaissance](#4.1-Reconnaissance)
 	- [4.2 Scanning](#4.2-Scanning)
 	- [4.3 Gaining access](#4.3-Gaining-access)
-		- [4.3.1 LDAP and Kerberos](#4.3.1-LDAP-and-Kerberos)
+		- [4.3.1 LDAP and Kerberos](red_teaming/gaining_access/ldap_and_kerberos.md#4.3.1-LDAP-and-Kerberos)
 	- [4.4 Maintaining access](#4.4-Maintaining-access)
 	- [4.5 Clearing tracks](#4.5-Clearing-tracks)
 	- [4.6 Network attacks](#4.6-Network-attacks)
