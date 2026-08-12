@@ -77,4 +77,5 @@
 	- [8.2 Servers](#8.2-Servers)
 		- [8.2.1 Apache 2.0](#8.2.1-Apache-2.0)
 		- [8.2.2 Nginx](#8.2.2-Nginx)
-	- [8.3 Masquerading](#8.3-Masquerading)
+	- [8.3 Masquerading](networking/masquerading/masquerading.md#8.3-Masquerading)
+	- [8.4 Zero Trust](networking/zero-trust/architectures.md#8.4-Zero-Trust)
